@@ -1,10 +1,13 @@
 <?php
- 
- spl_autoload_register(function ($classe) {
-   if (file_exists("{$classe}.class.php")) {
-       include_once "{$classe}.class.php";
-   }
- });
+
+spl_autoload_register(function ($classe) {
+    $filename = "{$classe}.class.php";
+    if (file_exists($filename)) {
+        include_once $filename;
+    } else {
+        throw new Exception("Classe {$classe} não encontrada.");
+    }
+});
 
 //cria a instrução de SELECT
 $sql = new TSqlSelect;
@@ -20,7 +23,7 @@ $sql->addColumn('nome');
 $criteria= new Tcriteria;
 
 //obtem a pessoa código '1'
-$criteria->add(new TFilter('codigo', '=','1'));
+$criteria->add(new TFilter('codigo ', '=',' 1'));
 
 //atribui o criterio de seleção
 $sql->setCriteria($criteria);
@@ -41,17 +44,17 @@ try
         echo $row['codigo'].'-'.$row['nome']."<br>\n";
 
         //fecha a conexão
-        $conn = null;
+        $conn = NULL;
     }
 }
 
 catch(PDOException $e)
 {
     //exbe mesnsagem de erro
-    print "ERRO!:".$e->getMessage()."<br>\n";
+    print "ERRO!: ".$e->getMessage()."<br>\n";
     die();
 }
-
+/*
 try
 {
     //abre conexão com a base pg_livro
@@ -69,11 +72,11 @@ try
     //Fecho conexão
     $conn = null;
 }
-
+*/
 catch(PDOException $e)
 {
     //Exibe a mensagem de erro
-    print "ERRO!:".$e->getMessage()."<br>\n";
+    print "ERRO!: ".$e->getMessage()."<br>\n";
     die();
 }
 ?>

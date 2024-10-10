@@ -38,9 +38,9 @@ final class TSqlInsert extends TSqlInstruction {
   public function getInstruction(){
 
     $this->sql = "INSERT INTO {$this->entity} (";
-    $columns = implode(',', array_keys($this->columnValues));
+    $columns = implode(', ', array_keys($this->columnValues));
 
-    $values = implode(',', array_values($this->columnValues));
+    $values = implode(', ', array_values($this->columnValues));
     $this->sql .= $columns.')';
     $this->sql .= "values ({$values})";
     return $this->sql;

@@ -23,19 +23,19 @@ final class TSqlSelect extends TSqlInstruction {
     {
         // monta a instrução SQL
 
-        $this->sql = 'SELECT';
+        $this->sql = ' SELECT ';
 
         //monta string com os nomes das colunas 
-        $this->sql .= implode(',',$this->columns);
+        $this->sql .= implode(', ', $this->columns);
 
         //adiciona na clausula FROM o nome da tabela
-        $this->sql .='FROM' . $this->entity;
+        $this->sql .= ' FROM '. $this->entity;
 
         //obtem a clausula where do objeto criteria
         if($this->criteria){
             $expression = $this->criteria->dump();
             if($expression){
-                $this->sql .='WHERE' . $expression;
+                $this->sql .=' WHERE ' . $expression;
             }
 
             //obtem as propriedades do critério
@@ -47,13 +47,13 @@ final class TSqlSelect extends TSqlInstruction {
             // obtem a ordenação do SELECT
 
             if($order){
-                $this->sql.= 'ORDER BY'.$order;
+                $this->sql.= ' ORDER BY '.$order;
             }
             if($limit){
-                $this->sql.= 'LIMIT'.$limit;
+                $this->sql.= ' LIMIT '.$limit;
             }
             if($offset){    
-                $this->sql.= 'OFFSET'.$offset;
+                $this->sql.= ' OFFSET '.$offset;
         }
     }
     return $this->sql;
